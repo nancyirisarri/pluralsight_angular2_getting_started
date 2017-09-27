@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 
 @Injectable()
-export class ProductGuardService implements CanActivate {
+export class ProductDetailGuard implements CanActivate {
 
     constructor(private _router: Router) {
     }

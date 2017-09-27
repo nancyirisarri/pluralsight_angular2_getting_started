@@ -8,8 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var ProductDetailComponent = (function () {
     function ProductDetailComponent(_route, _router) {
         this._route = _route;
@@ -34,15 +35,16 @@ var ProductDetailComponent = (function () {
     ProductDetailComponent.prototype.onBack = function () {
         this._router.navigate(['/products']);
     };
-    ProductDetailComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            templateUrl: 'product-detail.component.html',
-            styleUrls: ['product-detail.component.css']
-        }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router])
-    ], ProductDetailComponent);
     return ProductDetailComponent;
 }());
+ProductDetailComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        templateUrl: 'product-detail.component.html',
+        styleUrls: ['product-detail.component.css']
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object])
+], ProductDetailComponent);
 exports.ProductDetailComponent = ProductDetailComponent;
+var _a, _b;
 //# sourceMappingURL=product-detail.component.js.map
