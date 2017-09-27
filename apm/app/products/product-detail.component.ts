@@ -1,39 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs/Subscription';
+
 import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
-  moduleId: module.id,    
-  templateUrl: 'product-detail.component.html',
-  styleUrls: ['product-detail.component.css']
+  templateUrl: 'app/products/product-detail.component.html',
+  styleUrls: ['app/products/product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Product Detail';
   product: IProduct;
+  errorMessage: string;
+  private sub: Subscription;
     
   constructor(private _route: ActivatedRoute,
-              private _router: Router) { 
+              private _router: Router,
+              private _productService: ProductService) { 
   }
 
-  ngOnInit() {
-      //let id = +this._route.snapshot.paramMap.get('id');
-      let id = +this._route.snapshot.params['id'];
-      this.pageTitle += `: ${id}`;
-      this.product = {
-        "productId": id,
-        "productName": "Leaf Rake",
-        "productCode": "GDN-0011",
-        "releaseDate": "March 19, 2016",
-        "price": 19.95,
-        "description": "Leaf rake with 48-inch wooden handle.",
-        "starRating": 3.2,
-        "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"          
-      }
+  ngOnInit(): void {
+    this.sub = this._route.params.subscribe(
+        params => {
+            let id = +params['id'];
+            this.getProduct(id);
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+    
+  getProduct(id: number) {
+    this._productService.getProduct(id).subscribe(
+      product => this.product = product,
+      error => this.errorMessage = <any>error);
   }
     
   onBack(): void {
       this._router.navigate(['/products']);
   }
 
+  onRatingClicked(message: string): void {
+    this.pageTitle = 'Product Detail: ' + message;
+  }
 }
